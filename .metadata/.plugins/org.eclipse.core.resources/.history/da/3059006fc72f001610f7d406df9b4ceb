@@ -1,0 +1,333 @@
+package com.barclays.classifiers;
+
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.Reader;
+import java.io.StringReader;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.Properties;
+
+import opennlp.tools.doccat.DoccatModel;
+import opennlp.tools.doccat.DocumentCategorizerME;
+import opennlp.tools.doccat.DocumentSample;
+import opennlp.tools.doccat.DocumentSampleStream;
+import opennlp.tools.util.ObjectStream;
+import opennlp.tools.util.PlainTextByLineStream;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.LineIterator;
+import org.apache.log4j.Logger;
+import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.core.LowerCaseFilter;
+import org.apache.lucene.analysis.core.StopFilter;
+import org.apache.lucene.analysis.en.EnglishMinimalStemFilter;
+import org.apache.lucene.analysis.en.EnglishPossessiveFilter;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.analysis.standard.StandardFilter;
+import org.apache.lucene.analysis.standard.StandardTokenizer;
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
+import org.apache.lucene.analysis.util.CharArraySet;
+import org.apache.lucene.util.Version;
+
+public class OpenNLPClassifier {
+	final static Logger logger = Logger.getLogger(OpenNLPClassifier.class);
+	private static final String INPUT_TWEETS_REMOVED_STOPWORDS_TXT = "tweets_filtered_stopwords.txt";
+	private static String INPUT_TWEETS_ORIG_TXT = "D:\\Hackathon\\workspace\\MaxentGIS\\conf\\moviereview_train.tsv";
+	// private static String TEST_TWEETS_TXT = null;
+	// private static String MAXENTROPY_EMOTICON_SERIALIZED_MODEL = null;
+	private static final int TRAINING_ITERATIONS = 25000;
+	// private static String SEPARATOR = null;
+	// private static String output_file = null;
+	// private static String OUTPUT_SEPARATOR = null;
+	// Specifies the minimum number of times a feature must be seen and is used
+	// to designate a method of reducing the size of n-gram language models.
+	// Removal of n-grams that occur infrequently in the training data.
+	private static final int CUTOFF_FREQ = 2;
+	// refers to the general notion of iterative algorithms, where one sets out
+	// to solve a problem by successively producing (hopefully increasingly more
+	// accurate) approximations of some "ideal" solution. Generally speaking,
+	// the more iterations, the more accurate ("better") the result will be, but
+	// of course the more computational steps have to be carried out.
+	// private final ClassLoader CONTEXT_CLASS_LOADER = Thread.currentThread()
+	// .getContextClassLoader();
+
+	private String CONF_ENGLISH_CUSTOM_STOPWORDS_TXT = null;
+	private String TEST_TWEETS_TXT = null;
+	private byte[] MAXENTROPY_EMOTICON_SERIALIZED_MODEL = null;
+	static final String TAB_SEPARATOR = "\t";
+	static boolean readExistingModel = true;
+	static Object model;
+
+	public OpenNLPClassifier() {
+		// MAXENTROPY_EMOTICON_SERIALIZED_MODEL = "/maxEntropyModel_Emoticon";
+		CONF_ENGLISH_CUSTOM_STOPWORDS_TXT = "/english_stopwords.txt";
+		logger.info(CONF_ENGLISH_CUSTOM_STOPWORDS_TXT);
+		logger.info(MAXENTROPY_EMOTICON_SERIALIZED_MODEL);
+
+	}
+
+	public static void main(String[] args) throws IOException,
+			URISyntaxException {
+		/*
+		 * Path path =
+		 * Paths.get("C:/Workspace/OpenNLPClassifier/conf/maxEntropyModel_Emoticon"
+		 * ); byte[] data = Files.readAllBytes(path);
+		 */
+		OpenNLPClassifier classifier = new OpenNLPClassifier();
+		Path path = Paths.get("D:\\Hackathon\\workspace\\OpenNLPClassifier\\Maxentropy_Serialized_Model"); byte[] data = Files.readAllBytes(path);
+		Double sentimentScore = classifier.getTweetSentimentScore("Our little baby boy has arrived!!", classifier.deserialize(data));
+		System.out.println("Sentiment : "+ sentimentScore);
+	}
+
+	public void getFileSentiment(String filePath) throws IOException {
+		TEST_TWEETS_TXT = filePath;
+		String OUTPUT_SEPARATOR = "\t";
+		String SEPARATOR = "\t";
+		String userHome = System.getProperty("user.home");
+		String output_file = userHome.concat("/OpenNLPClassifier.txt");
+		logger.info("input file : " + TEST_TWEETS_TXT);
+		logger.info("SEPARATOR " + SEPARATOR);
+		logger.info("output_file : " + output_file);
+
+		FileOutputStream fos = new FileOutputStream(new File(output_file));
+
+		readModelAndTrain(true, MAXENTROPY_EMOTICON_SERIALIZED_MODEL);
+
+		List<String> lines = IOUtils.readLines(new FileInputStream(
+				TEST_TWEETS_TXT));
+
+		System.out.println("tweet_id" + OUTPUT_SEPARATOR + "tweet"
+				+ OUTPUT_SEPARATOR + "sentiment");
+		IOUtils.write("tweet_id" + OUTPUT_SEPARATOR + "tweet"
+				+ OUTPUT_SEPARATOR + "sentiment" + "\r\n", fos);
+		int count = 1;
+		for (String line : lines) {
+			String[] words = line.split(SEPARATOR);
+			String tweet = words[1];
+			double sentiment = predict(removeStopWords(tweet));
+			String sentiment_val = convert2ClassToSentiment(sentiment);
+			System.out.println(count + OUTPUT_SEPARATOR + tweet
+					+ OUTPUT_SEPARATOR + sentiment_val);
+			IOUtils.write(count + OUTPUT_SEPARATOR + tweet + OUTPUT_SEPARATOR
+					+ sentiment_val + "\r\n", fos);
+			count++;
+		}
+
+	}
+
+	public String getTweetSentiment(String tweetString) throws IOException {
+
+		readModelAndTrain(true, MAXENTROPY_EMOTICON_SERIALIZED_MODEL);
+		double sentiment = predict(removeStopWords(tweetString));
+		String sentiment_val = convert2ClassToSentiment(sentiment);
+		return sentiment_val;
+
+	}
+
+	public Double getTweetSentimentScore(String tweetString, Object model)
+			throws IOException {
+		setModel(model);
+		// readModelAndTrain(true, MAXENTROPY_EMOTICON_SERIALIZED_MODEL);
+		double sentiment = predict(removeStopWords(tweetString));
+		// String sentiment_val = convert2ClassToSentiment(sentiment);
+		return sentiment;
+
+	}
+
+	/**
+	 * Create the filtered base data for the model to train on
+	 * 
+	 * @throws IOException
+	 */
+	private File createModelInput(String fileName) throws IOException {
+		LineIterator it = null;
+		File newFile = new File(INPUT_TWEETS_REMOVED_STOPWORDS_TXT);
+		FileOutputStream fos = null;
+		try {
+
+			fos = new FileOutputStream(newFile);
+			it = FileUtils.lineIterator(new File(fileName), "UTF-8");
+			it.nextLine(); // Skip header
+			while (it.hasNext()) {
+				String line = it.nextLine();
+
+				String tweet = removeStopWords(line.split(TAB_SEPARATOR)[1]);
+
+				if (tweet == null || "".equals(tweet)) {
+					continue;
+				}
+				IOUtils.write(line.split(TAB_SEPARATOR)[2] + "\t" + tweet
+						+ "\n", fos);
+			}
+		} finally {
+			if (it != null) {
+				it.close();
+			}
+			if (fos != null) {
+				fos.close();
+			}
+		}
+		return newFile;
+	}
+
+	/**
+	 * Train and create the model on the stop-word filtered data
+	 * 
+	 * @throws IOException
+	 */
+	private void readModelAndTrain(boolean readExistingModel,
+			byte[] trainingDataFile) {
+		InputStream dataIn = null;
+		try {
+			ObjectStream<DocumentSample> sampleStream = new DocumentSampleStream(
+					new PlainTextByLineStream(new FileInputStream(
+							createModelInput(INPUT_TWEETS_ORIG_TXT)), "UTF-8"));
+			setModel(DocumentCategorizerME.train("en", sampleStream,
+					CUTOFF_FREQ, TRAINING_ITERATIONS));
+			serialize(model);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (dataIn != null) {
+				try {
+					dataIn.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+	}
+
+	/**
+	 * Evaluate the tweet against the trained model and output the sentiment
+	 * 
+	 * @param tweet
+	 *            Incoming tweet
+	 * @throws IOException
+	 */
+	private double predict(String tweet) {
+		DocumentCategorizerME myCategorizer = new DocumentCategorizerME(
+				(DoccatModel) model);
+		double[] outcomes = myCategorizer.categorize(tweet);
+		return Double.parseDouble(myCategorizer.getBestCategory(outcomes));
+	}
+
+	/**
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	void serialize(Object model) throws IOException {
+		File MAXENTROPY_SERIALIZED_MODEL = new File("D:\\Hackathon\\workspace\\OpenNLPClassifier\\Maxentropy_Serialized_Model");
+		OutputStream file = new BufferedOutputStream(new FileOutputStream(
+				MAXENTROPY_SERIALIZED_MODEL));
+		((DoccatModel) model).serialize(file);
+	}
+
+	public DoccatModel deserialize(byte[] fileName) throws IOException {
+
+		// InputStream fileStream = new FileInputStream(new File(fileName));
+		// InputStream fileStream = getClass().getResourceAsStream(fileName);
+		InputStream fileStream = new ByteArrayInputStream(fileName);
+		return new DoccatModel(fileStream);
+
+	}
+
+	public void setModel(Object model) {
+		this.model = model;
+	}
+
+	private String removeStopWords(String line) throws IOException {
+		line = getStemming(line);
+		TokenStream tokenStream = createTokenStream(new StringReader(line));
+		StringBuilder sb = new StringBuilder();
+		try {
+			CharTermAttribute token = tokenStream
+					.getAttribute(CharTermAttribute.class);
+			tokenStream.reset();
+			while (tokenStream.incrementToken()) {
+				if (sb.length() > 0) {
+					sb.append(" ");
+				}
+				sb.append(token.toString());
+			}
+		} finally {
+			tokenStream.close();
+		}
+		return sb.toString();
+	}
+
+	private String getStemming(String line) throws IOException {
+
+		// new Stemmer();
+		return new Stemmer().processTweets(line);
+		// return Stemmer.processTweets(line);
+	}
+
+	/**
+	 * Create a chained filter stream to filter the base data
+	 * 
+	 * @param reader
+	 *            Handle to base data file reader
+	 * @return Handle to filtered base data file reader
+	 * @throws IOException
+	 *             if there is an exception reading the data
+	 */
+	private TokenStream createTokenStream(Reader reader) throws IOException {
+		TokenStream result = new LowerCaseFilter(Version.LUCENE_48,
+				new StandardFilter(Version.LUCENE_48, new StandardTokenizer(
+						Version.LUCENE_48, reader)));
+		result = new StopFilter(Version.LUCENE_48, result,
+				readCustomStopWords());
+		return new EnglishMinimalStemFilter(new EnglishPossessiveFilter(
+				Version.LUCENE_48, result));
+	}
+
+	/**
+	 * Read the stop word configuration file into a @CharArraySet and return the
+	 * same
+	 * 
+	 * @return Set of stop words
+	 * @throws IOException
+	 *             if there was an error reading the stop-word configuration
+	 *             file
+	 */
+	private CharArraySet readCustomStopWords() throws IOException {
+		// String CONF_ENGLISH_CUSTOM_STOPWORDS_TXT = prop
+		// .getProperty("CONF_ENGLISH_CUSTOM_STOPWORDS_TXT");
+		CharArraySet engStopWords = new CharArraySet(Version.LUCENE_48,
+				StandardAnalyzer.STOP_WORDS_SET.size(), Boolean.TRUE);
+		InputStream englishFileStream = getClass().getResourceAsStream(
+				CONF_ENGLISH_CUSTOM_STOPWORDS_TXT);
+		List<String> lines = IOUtils.readLines(englishFileStream);
+
+		// List<String> lines = IOUtils.readLines(t
+		// .getContextClassLoader()
+		// .getResourceAsStream(CONF_ENGLISH_CUSTOM_STOPWORDS_TXT));
+		for (String line : lines) {
+			// System.out.println("Line is"+line);
+			engStopWords.add(line);
+		}
+		return engStopWords;
+	}
+
+	public String convert2ClassToSentiment(double sentimentScore) {
+		if (sentimentScore > 0.0)
+			return "positive";
+		else
+			return "negative";
+	}
+
+}

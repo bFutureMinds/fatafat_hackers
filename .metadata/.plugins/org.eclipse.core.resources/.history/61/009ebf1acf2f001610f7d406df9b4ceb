@@ -1,0 +1,73 @@
+package com.example;
+
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import opennlp.maxent.GISModel;
+import opennlp.tools.doccat.DoccatModel;
+
+import com.barclays.classifiers.MaxentGIS;
+import com.barclays.classifiers.OpenNLPClassifier;
+
+
+public class SentimentAnalysis {
+	private static final String TEST_TWEETS_TXT = "25K_classified.csv";
+	private static final String MAXENTROPY_MOVIE_REVIEW_SERIALIZED_MODEL = "maxEntropyModel_MovieReview";
+	private static final String MAXENTROPY_EMOTICON_SERIALIZED_MODEL = "maxEntropyModel_Emoticon";
+	static final String SEPARATOR = ",";
+	private OpenNLPClassifier openNLPModel;
+	private MaxentGIS maxEntGISModel;	
+	private DoccatModel openNLPMod;
+	private GISModel maxEntMod;
+
+	/*public static void main(String[] args) throws IOException {
+		List<String> lines = IOUtils
+				.readLines(Thread.currentThread().getContextClassLoader().getResourceAsStream("tweets_test.csv"));
+		SentimentAnalysis sentimentAnalysis = new SentimentAnalysis();
+		sentimentAnalysis.initializeModels();
+		System.out.println("Tweet, Original Sentiment, Prediction");
+		FileOutputStream fos = new FileOutputStream(new File("out.csv"));
+		int count = 0;
+		IOUtils.write("\n", fos);
+		for (String line : lines) {
+			String[] words = line.split(",");
+			String sentiment = sentimentAnalysis.calculateAverageSentiment(words[1]);
+			IOUtils.write(words[1] + "||" + words[0] + "||" + sentiment + "\r\n", fos);
+			System.out.println(++count);
+			System.out.print(words[1] + "||" + words[0] + "||" + sentiment + "\r\n");
+		}
+	}*/
+
+	SentimentAnalysis() {
+		this.openNLPModel = new OpenNLPClassifier();
+		this.maxEntGISModel = new MaxentGIS();
+	}
+
+	private void initializeModels() throws IOException {
+		Path openNLPModelPath = Paths.get("D:\\Hackathon\\workspace\\OpenNLPClassifier\\Maxentropy_Serialized_Model"); 
+		byte[] openNLPModelData = Files.readAllBytes(openNLPModelPath);
+		openNLPMod = openNLPModel.deserialize(openNLPModelData);
+		
+		Path maxentGISModelPath = Paths.get("D:\\Hackathon\\workspace\\MaxentGIS\\GISmaxEnt_MovieReview"); 
+		byte[] maxentGISModelData = Files.readAllBytes(maxentGISModelPath);
+		maxEntMod = maxEntGISModel.deserialize(maxentGISModelData);
+	}
+
+	private String calculateAverageSentiment(String tweet) throws IOException {
+		double sentimentSum = Double.parseDouble((String) NLPUtils.prop.get("initialFactor"));
+		String stopWordFilteredTweet = NLPUtils.removeStopWords(tweet);
+		
+		maxEntGISModel.getTweetSentimentScore(tweetString, model)
+
+		sentimentSum += Double.parseDouble((String) NLPUtils.prop.get("openNLPMovieReviewModelFactor"))
+				* this.openNLPClassifierMovieReview.predict(stopWordFilteredTweet);
+
+		sentimentSum += Double.parseDouble((String) NLPUtils.prop.get("opeNLPEmoticonModelFactor"))
+				* this.openNLPClassifierEmoticon.predict(stopWordFilteredTweet);
+
+		return NLPUtils.convertScoreToLifeMoment(sentimentSum);
+	}
+}

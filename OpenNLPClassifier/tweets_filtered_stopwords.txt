@@ -1,0 +1,32 @@
+3	newborn
+1	parent
+3	blessed child
+3	bless beautiful child
+2	parenting
+3	childbirth
+3	moment birth
+2	mother reaction baby boy priceless
+3	successful pregnancy
+3	welcome baby girl
+3	welcome baby boy world
+3	give birth baby girl
+3	give birth infant
+3	welcome miracle baby boy
+3	announce birth baby girl
+3	announce birth baby boy
+2	delivery baby boy
+2	delivery baby girl
+1	pregnant
+1	pregnancy
+1	mom
+1	mother
+1	father
+1	dad
+3	delivery baby boy
+3	delivery baby girl
+3	delivery baby boy
+3	delivery baby girl
+3	proud dad
+3	proud mom
+3	proud father
+3	proud mother

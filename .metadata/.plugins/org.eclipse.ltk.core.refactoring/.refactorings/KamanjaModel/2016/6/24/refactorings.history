@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;sentimentSum&apos; in &apos;com.example.SentimentAnalysis.calculateAverageSentiment(...)&apos; to &apos;modelSum&apos;&#x0D;&#x0A;- Original project: &apos;KamanjaModel&apos;&#x0D;&#x0A;- Original element: &apos;com.example.SentimentAnalysis.calculateAverageSentiment(String).sentimentSum&apos;&#x0D;&#x0A;- Renamed element: &apos;sentimentSum&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;sentimentSum&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;com.example{SentimentAnalysis.java[SentimentAnalysis~calculateAverageSentiment~QString;@sentimentSum!2391!2423!2398!2409!D!0!false" name="modelSum" references="true" stamp="1465648249816" version="1.0"/>
+</session>

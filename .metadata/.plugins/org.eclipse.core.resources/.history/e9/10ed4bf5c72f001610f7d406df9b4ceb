@@ -1,0 +1,77 @@
+package com.example;
+
+import com.barclays.classifiers.AFinnClassifier;
+import com.barclays.classifiers.IClassifier;
+import com.barclays.classifiers.OpenNLPClassifier;
+import com.barclays.classifiers.StanfordNLPClassifier;
+import com.barclays.util.NLPUtils;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.util.List;
+import org.apache.commons.io.IOUtils;
+
+public class SentimentAnalysis {
+	private static final String TEST_TWEETS_TXT = "25K_classified.csv";
+	private static final String AFINN_SERIALIZED_FILE_NAME = "afinnDictModel";
+	private static final String MAXENTROPY_MOVIE_REVIEW_SERIALIZED_MODEL = "maxEntropyModel_MovieReview";
+	private static final String MAXENTROPY_EMOTICON_SERIALIZED_MODEL = "maxEntropyModel_Emoticon";
+	static final String SEPARATOR = ",";
+	private IClassifier aFinnClassifier;
+	private IClassifier stanfordNLPClassifier;
+	private IClassifier openNLPClassifierMovieReview;
+	private IClassifier openNLPClassifierEmoticon;
+	private final boolean READ_EXISTING_MODEL = true;
+
+	public static void main(String[] args) throws IOException {
+		List<String> lines = IOUtils
+				.readLines(Thread.currentThread().getContextClassLoader().getResourceAsStream("tweets_test.csv"));
+		SentimentAnalysis sentimentAnalysis = new SentimentAnalysis();
+		sentimentAnalysis.initializeModels();
+		System.out.println("Tweet, Original Sentiment, Prediction");
+		FileOutputStream fos = new FileOutputStream(new File("out.csv"));
+		int count = 0;
+		IOUtils.write("\n", fos);
+		for (String line : lines) {
+			String[] words = line.split(",");
+			String sentiment = sentimentAnalysis.calculateAverageSentiment(words[1]);
+			IOUtils.write(words[1] + "||" + words[0] + "||" + sentiment + "\r\n", fos);
+			System.out.println(++count);
+			System.out.print(words[1] + "||" + words[0] + "||" + sentiment + "\r\n");
+		}
+	}
+
+	SentimentAnalysis() {
+		this.aFinnClassifier = new AFinnClassifier();
+		this.stanfordNLPClassifier = new StanfordNLPClassifier();
+		this.openNLPClassifierMovieReview = new OpenNLPClassifier();
+		this.openNLPClassifierEmoticon = new OpenNLPClassifier();
+	}
+
+	private void initializeModels() throws IOException {
+		this.aFinnClassifier.readModelAndTrain(READ_EXISTING_MODEL, (String) NLPUtils.prop.get("afinn"));
+		this.stanfordNLPClassifier.readModelAndTrain(READ_EXISTING_MODEL, null);
+		this.openNLPClassifierMovieReview.readModelAndTrain(READ_EXISTING_MODEL, (String) NLPUtils.prop.get("movieReview"));
+		this.openNLPClassifierEmoticon.readModelAndTrain(READ_EXISTING_MODEL,  (String) NLPUtils.prop.get("emoticon"));
+	}
+
+	private String calculateAverageSentiment(String tweet) throws IOException {
+		double sentimentSum = Double.parseDouble((String) NLPUtils.prop.get("initialFactor"));
+		String stopWordFilteredTweet = NLPUtils.removeStopWords(tweet);
+
+		sentimentSum += Double.parseDouble((String) NLPUtils.prop.get("aFinnModelFactor"))
+				* this.aFinnClassifier.predict(stopWordFilteredTweet);
+
+		sentimentSum += Double.parseDouble((String) NLPUtils.prop.get("stanfordNLPModelFactor"))
+				* this.stanfordNLPClassifier.predict(tweet);
+
+		sentimentSum += Double.parseDouble((String) NLPUtils.prop.get("openNLPMovieReviewModelFactor"))
+				* this.openNLPClassifierMovieReview.predict(stopWordFilteredTweet);
+
+		sentimentSum += Double.parseDouble((String) NLPUtils.prop.get("opeNLPEmoticonModelFactor"))
+				* this.openNLPClassifierEmoticon.predict(stopWordFilteredTweet);
+
+		return NLPUtils.convertScoreToSentiment(sentimentSum);
+	}
+}

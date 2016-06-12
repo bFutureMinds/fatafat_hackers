@@ -1,0 +1,90 @@
+2016-06-11 11:18:00,510 [pool-2-thread-3] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 4
+2016-06-11 11:18:00,510 [pool-2-thread-2] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 4
+2016-06-11 11:18:00,510 [pool-2-thread-1] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 4
+2016-06-11 11:18:00,504 [pool-2-thread-4] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 4
+2016-06-11 11:18:02,830 [New I/O client worker #1-1] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://maven.twttr.com/com/barclays/Pronto/0.0.1-SNAPSHOT/maven-metadata.xml
+2016-06-11 11:18:03,041 [New I/O client worker #2-1] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://clojars.org/repo/com/barclays/Pronto/0.0.1-SNAPSHOT/maven-metadata.xml
+2016-06-11 11:18:03,039 [New I/O client worker #3-1] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://conjars.org/repo/com/barclays/Pronto/0.0.1-SNAPSHOT/maven-metadata.xml
+2016-06-11 11:18:03,520 [Worker-7] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 4
+2016-06-11 11:18:05,098 [New I/O client worker #4-1] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repository.cloudera.com/artifactory/cloudera-repos/com/barclays/Pronto/0.0.1-SNAPSHOT/maven-metadata.xml
+2016-06-11 11:18:05,138 [Worker-11] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 4
+2016-06-11 11:18:05,217 [New I/O client worker #5-1] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repository.cloudera.com/artifactory/cloudera-repos/com/barclays/Pronto/0.0.1-SNAPSHOT/maven-metadata.xml
+2016-06-11 11:18:05,233 [Worker-7] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 4
+2016-06-11 11:18:06,301 [New I/O client worker #6-1] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://conjars.org/repo/com/barclays/Pronto/0.0.1-SNAPSHOT/Pronto-0.0.1-SNAPSHOT.pom
+2016-06-11 11:18:06,304 [New I/O client worker #7-1] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://conjars.org/repo/com/barclays/Pronto/0.0.1-SNAPSHOT/Pronto-0.0.1-SNAPSHOT.pom
+2016-06-11 11:18:06,324 [Worker-11] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 4
+2016-06-11 11:18:06,347 [Worker-7] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 4
+2016-06-11 11:18:06,965 [New I/O client worker #8-1] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://clojars.org/repo/com/barclays/Pronto/0.0.1-SNAPSHOT/Pronto-0.0.1-SNAPSHOT.pom
+2016-06-11 11:18:06,973 [Worker-11] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 4
+2016-06-11 11:18:07,002 [New I/O client worker #9-1] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://clojars.org/repo/com/barclays/Pronto/0.0.1-SNAPSHOT/Pronto-0.0.1-SNAPSHOT.pom
+2016-06-11 11:18:07,013 [Worker-7] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 4
+2016-06-11 11:18:07,481 [New I/O client worker #10-1] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://maven.twttr.com/com/barclays/Pronto/0.0.1-SNAPSHOT/Pronto-0.0.1-SNAPSHOT.pom
+2016-06-11 11:18:07,555 [Worker-11] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 4
+2016-06-11 11:18:07,646 [New I/O client worker #11-1] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded http://maven.twttr.com/com/barclays/Pronto/0.0.1-SNAPSHOT/Pronto-0.0.1-SNAPSHOT.pom
+2016-06-11 11:18:07,661 [Worker-7] INFO  c.n.h.c.p.n.NettyAsyncHttpProvider - Number of application's worked threads is 4
+2016-06-11 11:18:09,095 [New I/O client worker #12-1] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repository.cloudera.com/artifactory/cloudera-repos/com/barclays/Pronto/0.0.1-SNAPSHOT/Pronto-0.0.1-SNAPSHOT.pom
+2016-06-11 11:18:09,125 [New I/O client worker #13-1] INFO  o.e.m.c.i.e.AbstractTransferListenerAdapter - Downloaded https://repository.cloudera.com/artifactory/cloudera-repos/com/barclays/Pronto/0.0.1-SNAPSHOT/Pronto-0.0.1-SNAPSHOT.pom
+2016-06-11 11:18:29,820 [Worker-15] ERROR o.e.m.c.i.p.r.ProjectRegistryManager - Failed to read Maven project: 1 problem was encountered while building the effective model for com.barclays:AFinnClassifier:0.0.1
+[FATAL] Non-resolvable parent POM: Failure to find com.barclays:Pronto:pom:0.0.1-SNAPSHOT in http://conjars.org/repo was cached in the local repository, resolution will not be reattempted until the update interval of conjars.org has elapsed or updates are forced and 'parent.relativePath' points at wrong local POM @ line 28, column 9
+ for project com.barclays:AFinnClassifier:0.0.1 at D:\Hackathon\workspace\AFinnClassifier\pom.xml
+org.apache.maven.project.ProjectBuildingException: 1 problem was encountered while building the effective model for com.barclays:AFinnClassifier:0.0.1
+[FATAL] Non-resolvable parent POM: Failure to find com.barclays:Pronto:pom:0.0.1-SNAPSHOT in http://conjars.org/repo was cached in the local repository, resolution will not be reattempted until the update interval of conjars.org has elapsed or updates are forced and 'parent.relativePath' points at wrong local POM @ line 28, column 9
+ for project com.barclays:AFinnClassifier:0.0.1 at D:\Hackathon\workspace\AFinnClassifier\pom.xml
+	at org.apache.maven.project.DefaultProjectBuilder.build(DefaultProjectBuilder.java:149) ~[maven-core-3.0.4.jar:3.0.4]
+	at org.apache.maven.project.DefaultProjectBuilder.build(DefaultProjectBuilder.java:102) ~[maven-core-3.0.4.jar:3.0.4]
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.readMavenProject(MavenImpl.java:621) ~[org.eclipse.m2e.core_1.4.0.20130601-0317.jar:na]
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager$5.call(ProjectRegistryManager.java:768) ~[org.eclipse.m2e.core_1.4.0.20130601-0317.jar:na]
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager$5.call(ProjectRegistryManager.java:1) ~[org.eclipse.m2e.core_1.4.0.20130601-0317.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:161) ~[org.eclipse.m2e.core_1.4.0.20130601-0317.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:137) ~[org.eclipse.m2e.core_1.4.0.20130601-0317.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:89) ~[org.eclipse.m2e.core_1.4.0.20130601-0317.jar:na]
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.execute(ProjectRegistryManager.java:897) ~[org.eclipse.m2e.core_1.4.0.20130601-0317.jar:na]
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.readProjectWithDependencies(ProjectRegistryManager.java:764) ~[org.eclipse.m2e.core_1.4.0.20130601-0317.jar:na]
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.create(ProjectRegistryManager.java:165) ~[org.eclipse.m2e.core_1.4.0.20130601-0317.jar:na]
+	at org.eclipse.m2e.core.internal.project.registry.MavenProjectManager.create(MavenProjectManager.java:79) [org.eclipse.m2e.core_1.4.0.20130601-0317.jar:na]
+	at org.eclipse.m2e.core.ui.internal.actions.SelectionUtil.getMavenProject(SelectionUtil.java:284) [org.eclipse.m2e.core.ui_1.4.0.20130601-0317.jar:na]
+	at org.eclipse.m2e.editor.pom.MavenPomEditor.readMavenProject(MavenPomEditor.java:754) [org.eclipse.m2e.editor_1.4.0.20130601-0317.jar:na]
+	at org.eclipse.m2e.editor.pom.MavenPomEditor$6.run(MavenPomEditor.java:1077) [org.eclipse.m2e.editor_1.4.0.20130601-0317.jar:na]
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53) [org.eclipse.core.jobs_3.5.300.v20130429-1813.jar:na]
+Caused by: org.apache.maven.model.building.ModelBuildingException: 1 problem was encountered while building the effective model for com.barclays:AFinnClassifier:0.0.1
+[FATAL] Non-resolvable parent POM: Failure to find com.barclays:Pronto:pom:0.0.1-SNAPSHOT in http://conjars.org/repo was cached in the local repository, resolution will not be reattempted until the update interval of conjars.org has elapsed or updates are forced and 'parent.relativePath' points at wrong local POM @ line 28, column 9
+
+	at org.apache.maven.model.building.DefaultModelProblemCollector.newModelBuildingException(DefaultModelProblemCollector.java:195) ~[maven-model-builder-3.0.4.jar:3.0.4]
+	at org.apache.maven.model.building.DefaultModelBuilder.readParentExternally(DefaultModelBuilder.java:841) ~[maven-model-builder-3.0.4.jar:3.0.4]
+	at org.apache.maven.model.building.DefaultModelBuilder.readParent(DefaultModelBuilder.java:664) ~[maven-model-builder-3.0.4.jar:3.0.4]
+	at org.apache.maven.model.building.DefaultModelBuilder.build(DefaultModelBuilder.java:310) ~[maven-model-builder-3.0.4.jar:3.0.4]
+	at org.apache.maven.model.building.DefaultModelBuilder.build(DefaultModelBuilder.java:232) ~[maven-model-builder-3.0.4.jar:3.0.4]
+	at org.apache.maven.project.DefaultProjectBuilder.build(DefaultProjectBuilder.java:142) ~[maven-core-3.0.4.jar:3.0.4]
+	... 15 common frames omitted
+2016-06-11 11:36:52,902 [Worker-18] ERROR o.e.m.c.i.p.r.ProjectRegistryManager - Failed to read Maven project: 1 problem was encountered while building the effective model for com.barclays:MaxentGIS:0.0.1
+[FATAL] Non-resolvable parent POM: Failure to find com.barclays:Pronto:pom:0.0.1-SNAPSHOT in http://conjars.org/repo was cached in the local repository, resolution will not be reattempted until the update interval of conjars.org has elapsed or updates are forced and 'parent.relativePath' points at wrong local POM @ line 28, column 10
+ for project com.barclays:MaxentGIS:0.0.1 at D:\Hackathon\workspace\MaxentGIS\pom.xml
+org.apache.maven.project.ProjectBuildingException: 1 problem was encountered while building the effective model for com.barclays:MaxentGIS:0.0.1
+[FATAL] Non-resolvable parent POM: Failure to find com.barclays:Pronto:pom:0.0.1-SNAPSHOT in http://conjars.org/repo was cached in the local repository, resolution will not be reattempted until the update interval of conjars.org has elapsed or updates are forced and 'parent.relativePath' points at wrong local POM @ line 28, column 10
+ for project com.barclays:MaxentGIS:0.0.1 at D:\Hackathon\workspace\MaxentGIS\pom.xml
+	at org.apache.maven.project.DefaultProjectBuilder.build(DefaultProjectBuilder.java:149) ~[maven-core-3.0.4.jar:3.0.4]
+	at org.apache.maven.project.DefaultProjectBuilder.build(DefaultProjectBuilder.java:102) ~[maven-core-3.0.4.jar:3.0.4]
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.readMavenProject(MavenImpl.java:621) ~[org.eclipse.m2e.core_1.4.0.20130601-0317.jar:na]
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager$5.call(ProjectRegistryManager.java:768) ~[org.eclipse.m2e.core_1.4.0.20130601-0317.jar:na]
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager$5.call(ProjectRegistryManager.java:1) ~[org.eclipse.m2e.core_1.4.0.20130601-0317.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:161) ~[org.eclipse.m2e.core_1.4.0.20130601-0317.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:137) ~[org.eclipse.m2e.core_1.4.0.20130601-0317.jar:na]
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:89) ~[org.eclipse.m2e.core_1.4.0.20130601-0317.jar:na]
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.execute(ProjectRegistryManager.java:897) ~[org.eclipse.m2e.core_1.4.0.20130601-0317.jar:na]
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.readProjectWithDependencies(ProjectRegistryManager.java:764) ~[org.eclipse.m2e.core_1.4.0.20130601-0317.jar:na]
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.create(ProjectRegistryManager.java:165) ~[org.eclipse.m2e.core_1.4.0.20130601-0317.jar:na]
+	at org.eclipse.m2e.core.internal.project.registry.MavenProjectManager.create(MavenProjectManager.java:79) [org.eclipse.m2e.core_1.4.0.20130601-0317.jar:na]
+	at org.eclipse.m2e.core.ui.internal.actions.SelectionUtil.getMavenProject(SelectionUtil.java:284) [org.eclipse.m2e.core.ui_1.4.0.20130601-0317.jar:na]
+	at org.eclipse.m2e.editor.pom.MavenPomEditor.readMavenProject(MavenPomEditor.java:754) [org.eclipse.m2e.editor_1.4.0.20130601-0317.jar:na]
+	at org.eclipse.m2e.editor.pom.MavenPomEditor$6.run(MavenPomEditor.java:1077) [org.eclipse.m2e.editor_1.4.0.20130601-0317.jar:na]
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53) [org.eclipse.core.jobs_3.5.300.v20130429-1813.jar:na]
+Caused by: org.apache.maven.model.building.ModelBuildingException: 1 problem was encountered while building the effective model for com.barclays:MaxentGIS:0.0.1
+[FATAL] Non-resolvable parent POM: Failure to find com.barclays:Pronto:pom:0.0.1-SNAPSHOT in http://conjars.org/repo was cached in the local repository, resolution will not be reattempted until the update interval of conjars.org has elapsed or updates are forced and 'parent.relativePath' points at wrong local POM @ line 28, column 10
+
+	at org.apache.maven.model.building.DefaultModelProblemCollector.newModelBuildingException(DefaultModelProblemCollector.java:195) ~[maven-model-builder-3.0.4.jar:3.0.4]
+	at org.apache.maven.model.building.DefaultModelBuilder.readParentExternally(DefaultModelBuilder.java:841) ~[maven-model-builder-3.0.4.jar:3.0.4]
+	at org.apache.maven.model.building.DefaultModelBuilder.readParent(DefaultModelBuilder.java:664) ~[maven-model-builder-3.0.4.jar:3.0.4]
+	at org.apache.maven.model.building.DefaultModelBuilder.build(DefaultModelBuilder.java:310) ~[maven-model-builder-3.0.4.jar:3.0.4]
+	at org.apache.maven.model.building.DefaultModelBuilder.build(DefaultModelBuilder.java:232) ~[maven-model-builder-3.0.4.jar:3.0.4]
+	at org.apache.maven.project.DefaultProjectBuilder.build(DefaultProjectBuilder.java:142) ~[maven-core-3.0.4.jar:3.0.4]
+	... 15 common frames omitted

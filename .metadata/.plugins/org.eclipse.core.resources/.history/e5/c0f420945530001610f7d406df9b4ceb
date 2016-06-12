@@ -1,0 +1,90 @@
+package com.example;
+
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import opennlp.maxent.GISModel;
+import opennlp.tools.doccat.DoccatModel;
+
+import com.barclays.classifiers.MaxentGIS;
+import com.barclays.classifiers.OpenNLPClassifier;
+
+
+public class SentimentAnalysis {
+	static final String SEPARATOR = ",";
+	private OpenNLPClassifier openNLPModel = new OpenNLPClassifier();
+	private MaxentGIS maxEntGISModel = new MaxentGIS();	
+	private DoccatModel openNLPMod;
+	private GISModel maxEntMod;
+	
+	public static void main(String[] args) throws IOException{
+		SentimentAnalysis sentimentAnalysis = new SentimentAnalysis();
+		sentimentAnalysis.initializeModels();
+		LifeMoments lf = sentimentAnalysis.calculateAverageSentiment("Our little baby boy has arrived!!");
+		System.out.println(lf);
+	}
+
+	/*public static void main(String[] args) throws IOException {
+		List<String> lines = IOUtils
+				.readLines(Thread.currentThread().getContextClassLoader().getResourceAsStream("tweets_test.csv"));
+		SentimentAnalysis sentimentAnalysis = new SentimentAnalysis();
+		sentimentAnalysis.initializeModels();
+		System.out.println("Tweet, Original Sentiment, Prediction");
+		FileOutputStream fos = new FileOutputStream(new File("out.csv"));
+		int count = 0;
+		IOUtils.write("\n", fos);
+		for (String line : lines) {
+			String[] words = line.split(",");
+			String sentiment = sentimentAnalysis.calculateAverageSentiment(words[1]);
+			IOUtils.write(words[1] + "||" + words[0] + "||" + sentiment + "\r\n", fos);
+			System.out.println(++count);
+			System.out.print(words[1] + "||" + words[0] + "||" + sentiment + "\r\n");
+		}
+	}*/
+
+	private void initializeModels() throws IOException {
+		Path openNLPModelPath = Paths.get("D:\\Hackathon\\workspace\\OpenNLPClassifier\\Maxentropy_Serialized_Model"); 
+		byte[] openNLPModelData = Files.readAllBytes(openNLPModelPath);
+		openNLPMod = openNLPModel.deserialize(openNLPModelData);
+		
+		Path maxentGISModelPath = Paths.get("D:\\Hackathon\\workspace\\MaxentGIS\\GISmaxEnt_MovieReview"); 
+		byte[] maxentGISModelData = Files.readAllBytes(maxentGISModelPath);
+		maxEntMod = maxEntGISModel.deserialize(maxentGISModelData);
+	}
+
+	private LifeMoments calculateAverageSentiment(String tweet) throws IOException {
+		double modelSum = 0.0;		
+		//String stopWordFilteredTweet = NLPUtils.removeStopWords(tweet);
+		modelSum +=  openNLPModel.getTweetSentimentScore(tweet, openNLPMod);
+		modelSum +=  maxEntGISModel.getTweetSentimentScore(tweet, maxEntMod);
+
+		return convertScoreToLifeMoment(modelSum/2);
+	}
+	
+	private static LifeMoments convertScoreToLifeMoment(double modelSum){
+		if (modelSum > 1.0 && modelSum <= 3.0 )
+			return LifeMoments.HavingABaby;
+		else if (modelSum > 1.0 && modelSum <= 3.0 )
+			return LifeMoments.GettingMarried;
+		else if (modelSum > 4.0 && modelSum <= 6.0 )
+			return LifeMoments.BuyingACar;
+		else if (modelSum > 7.0 && modelSum <= 9.0 )
+			return LifeMoments.BuyingAHome;
+		else if (modelSum > 10.0 && modelSum <= 12.0 )
+			return LifeMoments.ChangesAtWork;
+		else if (modelSum > 13.0 && modelSum <= 15.0 )
+			return LifeMoments.Bereavement;
+		else if (modelSum > 16.0 && modelSum <= 18.0 )
+			return LifeMoments.Separation;
+		else if (modelSum > 19.0 && modelSum <= 21.0 )
+			return LifeMoments.Retirement;
+		else
+			return LifeMoments.NA;
+	}
+	
+	public enum LifeMoments { HavingABaby, GettingMarried, BuyingACar, BuyingAHome, ChangesAtWork, Bereavement, Separation, Retirement, NA };
+
+}
