@@ -1,0 +1,2 @@
+bank_customer_id,maritalstatus,age,gender,marriedsincemonths,kidsstorevisits3months,hospitalvisits1year,events3months,childsavingplan1month,childinsured1month,actualresult
+1008,married,33,male,60,7,3,1,1,1,yes

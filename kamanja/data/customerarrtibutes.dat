@@ -1,0 +1,7 @@
+bank_customer_id,maritalstatus,age,gender,marriedsincemonths,kidsstorevisits3months,hospitalvisits1year,events3months,childsavingplan1month,childinsured1month,actualresult
+1000,married,30,male,20,3,3,1,0,0,no
+1001,married,35,male,48,2,2,0,0,0,no
+1002,unmarried,28,male,0,2,0,0,0,0,no
+1003,unmarried,29,male,0,0,0,0,0,0,no
+1004,married,28,female,12,1,6,0,1,0,yes
+1005,unmarried,28,female,0,3,2,0,0,1,yes

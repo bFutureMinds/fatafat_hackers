@@ -1,0 +1,22 @@
+{
+  "Container": {
+        "NameSpace": "system",
+        "Name": "productholding",
+        "Version": "00.01.00",
+        "Description": "product holding of customers",
+        "Fixed": "true",
+        "Fields": [
+          {
+                "Name": "bank_customer_id",
+                "Type": "System.String"
+          },
+          {
+                "Name": "productname",
+                "Type": "System.String"
+          }
+        ],
+        "PartitionKey": [
+          "bank_customer_id"
+        ]
+  }
+}

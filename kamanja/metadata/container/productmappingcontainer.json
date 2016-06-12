@@ -1,0 +1,23 @@
+{
+  "Container": {
+        "NameSpace": "system",
+        "Name": "productmapping",
+        "Version": "00.01.00",
+        "Description": "mapping of life events and product recommendations ",
+        "Fixed": "true",
+        "Fields": [
+          {
+                "Name": "lifeevent",
+                "Type": "System.String"
+          },
+          {
+                "Name": "productname",
+                "Type": "System.String"
+          }
+        ],
+        "PartitionKey": [
+          "lifeevent"
+        ]
+  }
+}
+

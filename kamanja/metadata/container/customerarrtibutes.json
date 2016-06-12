@@ -1,0 +1,62 @@
+{
+  "Container": {
+        "NameSpace": "system",
+        "Name": "customerarrtibutes",
+        "Version": "00.01.02",
+        "Description": "customer attributes",
+        "Fixed": "true",
+        "Fields": [
+          {
+                "Name": "bank_customer_id",
+                "Type": "System.String"
+          },
+          {
+                "Name": "maritalstatus",
+                "Type": "System.String"
+          },
+          {
+                "Name": "age",
+                "Type": "System.Int"
+          },
+          {
+                "Name": "gender",
+                "Type": "System.String"
+          },
+          {
+                "Name": "marriedsincemonths",
+                "Type": "System.Int"
+          },
+          {
+                "Name": "kidsstorevisits3months",
+                "Type": "System.Int"
+          },
+          {
+                "Name": "hospitalvisits1year",
+                "Type": "System.Int"
+          },
+          {
+                "Name": "events3months",
+                "Type": "System.Int"
+          },
+          {
+                "Name": "childsavingplan1month",
+                "Type": "System.Int"
+          },
+          {
+                "Name": "childinsured1month",
+                "Type": "System.Int"
+          },
+          {
+                "Name": "actualresult",
+                "Type": "System.String"
+          }
+        ],
+        "PrimaryKey": [
+          "bank_customer_id"
+        ],
+        "PartitionKey": [
+          "bank_customer_id"
+        ]
+  }
+}
+

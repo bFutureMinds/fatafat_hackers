@@ -1,0 +1,57 @@
+@relation pima_bank
+@attribute 'maritalstatus' { married, unmarried, divorced }
+@attribute 'age' numeric
+@attribute 'gender' { male, female }
+@attribute 'marriedsincemonths' numeric
+@attribute 'kidsstorevisits3months' numeric
+@attribute 'hospitalvisits1year' numeric
+@attribute 'events3months' numeric
+@attribute 'childsavingplan1month' numeric
+@attribute 'childinsuredmonths' numeric
+@attribute 'class' { cb_no, cb_yes }
+@data
+married,30,male,20,3,3,1,0,0,cb_no
+married,35,male,48,2,2,0,0,0,cb_no
+married,60,male,360,3,4,0,0,0,cb_no
+married,70,male,450,2,6,0,0,0,cb_no
+married,28,female,6,1,2,0,0,0,cb_no
+married,35,female,84,0,1,0,0,0,cb_no
+married,50,female,420,2,3,2,0,0,cb_no
+married,70,female,624,0,10,0,0,0,cb_no
+unmarried,28,male,0,2,0,0,0,0,cb_no
+unmarried,29,male,0,0,0,0,0,0,cb_no
+unmarried,31,male,0,0,1,0,0,0,cb_no
+unmarried,34,male,0,0,3,0,0,0,cb_no
+unmarried,22,female,0,0,11,1,0,0,cb_no
+unmarried,25,female,0,2,0,0,0,0,cb_no
+unmarried,27,female,0,2,1,0,0,0,cb_no
+unmarried,29,female,0,2,1,0,0,0,cb_no
+divorced,35,male,0,2,1,0,0,0,cb_no
+divorced,28,male,0,1,0,0,0,0,cb_no
+divorced,31,male,0,1,0,2,0,0,cb_no
+divorced,40,male,0,1,8,1,0,0,cb_no
+divorced,32,female,0,1,1,0,0,0,cb_no
+divorced,45,female,0,0,4,1,0,0,cb_no
+divorced,40,female,0,0,2,0,0,0,cb_no
+divorced,35,female,0,3,1,2,0,0,cb_no
+married,30,male,12,5,4,1,1,1,cb_yes
+married,35,male,48,2,3,1,0,0,cb_yes
+married,60,male,24,8,15,1,0,1,cb_yes
+married,33,male,18,2,6,1,1,0,cb_yes
+married,32,male,36,8,10,0,0,0,cb_yes
+married,38,male,36,6,8,0,0,1,cb_yes
+married,42,male,108,8,10,1,1,1,cb_yes
+married,46,male,24,4,7,0,0,0,cb_yes
+married,37,male,10,2,6,1,1,0,cb_yes
+married,28,female,9,1,5,0,0,0,cb_yes
+married,35,female,12,3,8,0,0,0,cb_yes
+married,50,female,180,2,14,1,0,0,cb_yes
+married,38,female,96,0,7,0,0,0,cb_yes
+married,33,female,48,9,10,0,0,0,cb_yes
+married,40,female,120,5,10,0,1,1,cb_yes
+married,36,female,36,2,9,0,0,0,cb_yes
+married,29,female,36,10,5,1,0,0,cb_yes
+married,28,female,12,1,6,0,1,0,cb_yes
+unmarried,28,female,0,3,2,0,0,1,cb_yes
+unmarried,29,female,0,9,3,0,1,0,cb_yes
+divorced,35,female,0,10,3,0,0,0,cb_yes

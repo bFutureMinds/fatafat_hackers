@@ -1,0 +1,36 @@
+{
+  "Message" : {
+    "NameSpace" : "system",
+    "Name" : "socialmessage",
+    "Version" : "00.01.00",
+    "Description" : "social data message",
+    "Fixed" : "true",
+    "Elements" : [
+      {
+        "Field" : {
+          "Name" : "user_name",
+          "Type" : "System.String"
+        }
+      },
+      {
+        "Field" : {
+          "Name" : "msg_source",
+          "Type" : "System.String"
+        }
+      },
+      {
+        "Field" : {
+          "Name" : "post",
+          "Type" : "System.String"
+        }
+      }
+    ],
+    "PartitionKey": [
+        "user_name"
+    ],
+    "PrimaryKey": [
+        "user_name"
+    ]
+  }
+}
+

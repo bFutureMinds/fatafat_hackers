@@ -1,0 +1,18 @@
+{
+    "HackathonModel": {
+        "Dependencies": [
+        	"bank_predict.jar",
+        	"weka.jar",
+        	"MaxentGIS.jar",
+        	"OpenNLP.jar"
+        ],
+        "MessageAndContainers": [
+            "system.socialmessage",
+            "system.socialidtobankidmapcontainer",
+            "system.customerarrtibutes",
+	    "system.productholding",
+	    "system.productmapping"
+        ]
+    }
+}
+
